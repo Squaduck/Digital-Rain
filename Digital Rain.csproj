@@ -6,6 +6,22 @@
     <RootNamespace>Digital_Rain</RootNamespace>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
+
+    <PackAsTool>true</PackAsTool>
+    <ToolCommandName>csharpmatrix</ToolCommandName>
+    <PackageId>Squaduck.CSharpMatrix</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Squaduck</Authors>
+    <Product>C# Matrix</Product>
+    <Description>A basic, yet highly modifiable recreation of the digital rain effect from the matrix. Package named after the well-known cmatrix.</Description>
+    <PackageReadmeFile>NugetREADME.md</PackageReadmeFile>
+    <RepositoryUrl>https://github.com/Squaduck/Digital-Rain</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="NugetREADME.md" Pack="true" PackagePath="/"/>
+  </ItemGroup>
 
 </Project>
