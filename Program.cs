@@ -27,6 +27,21 @@ class Program
         int TrailLength = 30;
         RGB_Col ActiveRaindropCharCol = new(255, 255, 255);
         //RGB_Col RaindropTrailStartCol = new(0, 255, 0);
+        RGB_Col[] RaindropTrailPallette =
+        //[new(0xff1b8d), new(0xffd900), new(0x1bb3ff)];                                                // Pansexual pride flag. Colors from Wikipedia: #ff1b8d, #ffd900, #1bb3ff
+        //[new(0x3aa740), new(0xa8d47a), new(0xffffff), new(0xababab)];                                 // Aromantic pride flag. Colors from Wikipedia: #3aa740, #a8d47a, #ffffff, #ababab, #000000. Pure black omitted.
+        //[new(0xa5a5a5), new(0xffffff), new(0x810081)];                                                // Asexual pride flag. Colors from Wikipedia: #000000, #a5a5a5, #ffffff, #810081. Pure black omitted.
+        //[new(0x3aa740), new(0xa8d47a), new(0xffffff), new(0x810081)];                                 // aroace pride flag. Previous two mashed together.
+        //[new(0xd70071), new(0x9c4e97), new(0x0035aa)];                                                // Bisexual pride flag. Colors from Wikipedia: #d70071, #9c4e97, #0035aa
+        //[new(0xffd900), new(0xffd900), new(0xffd900), new(0x7a00ac)];                                 // Intersex pride flag. Colors from Wikipedia: #ffd900, #7a00ac. Yellow repeated to make it more common.
+        //[new(0xfff42f), new(0xffffff), new(0x9c59d1), new(0x292929)];                                 // Non-Binary pride flag. Colors from Wikipedia: #fff42f, #ffffff, #9c59d1, #292929. Dark grey included.
+        //[new(0x5bcffa), new(0xf5abb9), new(0xffffff), new(0xf5abb9), new(0x5bcffa)];                  // Transgender pride flag. Colors from Wikipedia: #5bcffa, #f5abb9, #ffffff, #f5abb9, #5bcffa. Colors duplicated to make white less common.
+        //[new(0xd62900), new(0xff9b55), new(0xffffff), new(0xd462a6), new(0xa50062)];                  // Lesbian pride flag (5-Stripe). Colors from Wikipedia: #d62900, #ff9b55, #ffffff, #d462a6, #a50062
+        // Intersex-Inclusive Progressive Pride Flag:
+        [new(0xfdd910), new(0x7a00ac), new(0xffffff), new(0xf4b0c9), new(0x7ccde6), new(0x7ccde6), new(0x95540e), new(0xe31a0e), new(0xf28a10), new(0xf0e61f), new(0x79b925), new(0x2857a6), new(0x6d1e81)]; // Colors from Wikipedia: #fdd910, #66308c (#7a00ac used instead. Taken from standalone intersex), #ffffff, #f4b0c9, #7ccde6, #95540e, #000000, #e31a0e, #f28a10, #f0e61f, #79b925, #2857a6, #6d1e81 . Pure black omitted.
+        //[new(0x623500), new(0xd66300), new(0xfede63), new(0xfee7b9), new(0xffffff), new(0x545454)];   // Bear pride flag. Colors from Wikipedia: #623500, #d66300, #fede63, #fee7b9, #ffffff, #545454, #000000. Pure black omitted.
+        //[new(0x018e71), new(0x99e9c2), new(0xffffff), new(0x7cafe3), new(0x3b1379)];                  // Gay pride flag. Colors from Wikipedia: #018e71, #99e9c2, #ffffff, #7cafe3, #3b1379.
+        // You get the point. If you want more, take colors from Hyfetch or something.
 
         bool Quit = false;
         while (!Quit)
@@ -45,7 +60,7 @@ class Program
             CharBuffer.Fill(BlankChar);
 
             while(Random.Shared.Next(2) == 0)
-                Raindrops.Add(new(TrailLength, CurrentTermSize.cols, HSL_Util.HSLtoRGB(new(Random.Shared.NextDouble() * 360d, 1d, 0.6d)), ActiveRaindropCharCol));
+                Raindrops.Add(new(TrailLength, CurrentTermSize.cols, RaindropTrailPallette[Random.Shared.Next(RaindropTrailPallette.Length)], ActiveRaindropCharCol));
 
             for (int i = 0; i < Raindrops.Count; i++)
             {
