@@ -10,7 +10,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>csharpmatrix</ToolCommandName>
     <PackageId>Squaduck.CSharpMatrix</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Squaduck</Authors>
     <Product>C# Matrix</Product>
     <Description>A basic, yet highly modifiable recreation of the digital rain effect from the matrix. Package named after the well-known cmatrix.</Description>
