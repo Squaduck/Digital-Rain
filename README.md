@@ -1,6 +1,8 @@
 # Digital Rain
 My take on the famous digital rain effect from the matrix.
 
+https://youtu.be/9UXcYOdrRUM
+
 ### Running
 Assuming you have dotnet installed, its as simple as cloning this repo and running `dotnet run` in your favorite shell.
 

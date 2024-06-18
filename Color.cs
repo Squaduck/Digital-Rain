@@ -2,11 +2,25 @@ namespace Digital_Rain;
 
 using System;
 
-public struct RGB_Col(byte R, byte G, byte B) : IEquatable<RGB_Col>
+public struct RGB_Col : IEquatable<RGB_Col>
 {
-    public byte R = R;
-    public byte G = G;
-    public byte B = B;
+    public byte R;
+    public byte G;
+    public byte B;
+
+    public RGB_Col(byte R, byte G, byte B)
+    {
+        this.R = R;
+        this.G = G;
+        this.B = B;
+    }
+
+    public RGB_Col(int PackedRGB)
+    {
+        R = (byte)((PackedRGB >> 16) & 0xff);
+        G = (byte)((PackedRGB >> 8) & 0xff);
+        B = (byte)(PackedRGB & 0xff);
+    }
 
     public bool Equals(RGB_Col Other) => R == Other.R && G == Other.G && B == Other.B;
 
