@@ -73,6 +73,7 @@ class Program
                     Raindrops.RemoveAt(i);
             }
 
+            Console.SetCursorPosition(0, 0);
             Console.Write(RenderFrameForConsole(CharBuffer, CurrentTermSize));
 
             if (Console.KeyAvailable)
