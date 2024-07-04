@@ -92,6 +92,10 @@ public class Raindrop
 
         for (int i = 0; i < Trail.Count; i++)
         {
+            // Subtracting one here moves moves it up one line.
+            // This is necessary because Raindrop.Update() places the active character one line down.
+            // This caused the active character to start one line too far down.
+            // There is probably a better way to fix this, but this works fine.
             int PosIndex = (Line - i - 1) * TerminalSize.cols + Column;
 
             if (PosIndex >= 0 && PosIndex < CharBuffer.Length)
