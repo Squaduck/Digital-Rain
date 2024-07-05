@@ -8,9 +8,9 @@ After installing the package as a global tool, simply run `csharpmatrix` anywher
 
 ### Keybinds
 While the program is running, there are some buttons you can press to do things.
-- <kbd>q</kbd> - Quit after next frame.
-- <kbd>ctrl</kbd> + <kbd>c</kbd> - Quit ASAP.
-- <kbd>d</kbd> - Show time how much time is spent in each part of the main loop. Rotates through 2 modes - simple and detailed. (Also off, if you count that.)
+- `q` - Quit after next frame.
+- `ctrl` + `c` - Quit ASAP.
+- `d` - Show time how much time is spent in each part of the main loop. Rotates through 2 modes - simple and detailed. (Also off, if you count that.)
 
 ### Font
 For the best experience, use the font [Hack](https://github.com/source-foundry/Hack). It's the default in KDE's Konsole.
