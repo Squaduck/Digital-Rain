@@ -7,6 +7,7 @@
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>enable</Nullable>
 
+    <!-- These settings don't work with Nuget packaging. Current solution is to manually disable with -p:{property}={value} (eg: dotnet pack -p:SelfContained=false -p:PublishSingleFile=false -p:PublishTrimmed=false) -->
     <PublishSingleFile>true</PublishSingleFile>
     <PublishTrimmed>true</PublishTrimmed>
     <SelfContained>true</SelfContained>
@@ -15,7 +16,7 @@
     <PackAsTool>true</PackAsTool>
     <ToolCommandName>csharpmatrix</ToolCommandName>
     <PackageId>Squaduck.CSharpMatrix</PackageId>
-    <Version>1.0.1</Version>
+    <Version>1.1.0</Version>
     <Authors>Squaduck</Authors>
     <Product>C# Matrix</Product>
     <Description>A basic, yet highly modifiable recreation of the digital rain effect from the matrix. Package named after the well-known cmatrix.</Description>
