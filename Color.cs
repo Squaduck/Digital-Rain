@@ -62,6 +62,23 @@ public struct RGB_Char
     public char Character;
 }
 
+public static class RGB_Char_StringExtensions
+{
+    public static Span<RGB_Char> ToRGB_Chars(this ReadOnlySpan<char> StringToConvert, RGB_Col? ForegroundColor = null, RGB_Col? BackgroundColor = null)
+    {
+        ForegroundColor ??= new(0xffffff);
+        BackgroundColor ??= new(0);
+        Span<RGB_Char> RGB_Chars = new(new RGB_Char[StringToConvert.Length]);
+        for (int i = 0; i < StringToConvert.Length; i++)
+        {
+            RGB_Chars[i] = new() { Character = StringToConvert[i], FG_Col = ForegroundColor.Value, BG_Col = BackgroundColor.Value };
+        }
+        return RGB_Chars;
+    }
+
+    public static Span<RGB_Char> ToRGB_Chars(this string StringToConvert, RGB_Col? ForegroundColor = null, RGB_Col? BackgroundColor = null) => ToRGB_Chars(StringToConvert.AsSpan(), ForegroundColor, BackgroundColor);
+}
+
 class HSL_Util
 {
     // Weird name taken straight from the textbook this came out of. 

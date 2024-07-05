@@ -6,6 +6,12 @@ My take on the famous digital rain effect from the matrix.
 ### Running
 After installing the package as a global tool, simply run `csharpmatrix` anywhere in your favorite shell.
 
+### Keybinds
+While the program is running, there are some buttons you can press to do things.
+- <kbd>q</kbd> - Quit after next frame.
+- <kbd>ctrl</kbd> + <kbd>c</kbd> - Quit ASAP.
+- <kbd>d</kbd> - Show time how much time is spent in each part of the main loop. Rotates through 2 modes - simple and detailed. (Also off, if you count that.)
+
 ### Font
 For the best experience, use the font [Hack](https://github.com/source-foundry/Hack). It's the default in KDE's Konsole.
 I chose the characters from the characters that exist in Hack. Other fonts may work, but Hack is guaranteed to work.
