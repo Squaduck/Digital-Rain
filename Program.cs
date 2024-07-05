@@ -4,6 +4,7 @@ using System;
 using System.Text;
 using System.Threading;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 class Program
 {
@@ -28,6 +29,17 @@ class Program
         RGB_Col ActiveRaindropCharCol = new(255, 255, 255);
         //RGB_Col RaindropTrailStartCol = new(0, 255, 0);
 
+        int DisplayDiagnostics = 0;
+        Stopwatch StopwatchFull = new();
+        Stopwatch StopwatchPart = new();
+        TimeSpan LastLoopTime = new();
+        TimeSpan UpdateAndRenderTime = new();
+        TimeSpan LastCompositeTime = new();
+        TimeSpan LastWriteOutTime = new();
+        TimeSpan SpawnTime = new();
+        int LastWriteOutLength = 0;
+        string DiagnosticDisplayString;
+
         bool Quit = false;
         while (!Quit)
         {
@@ -43,6 +55,8 @@ class Program
             }
 
             CharBuffer.Fill(BlankChar);
+
+            StopwatchPart.Restart();
 
             for (int i = 0; i < CurrentTermSize.cols; i++)
             {
@@ -76,7 +90,12 @@ class Program
                     }
                 }
             }
-            
+
+            StopwatchPart.Stop();
+            SpawnTime = StopwatchPart.Elapsed;
+
+            StopwatchPart.Restart();
+
             for (int i = 0; i < Raindrops.Count; i++)
             {
                 if (Raindrops[i].IsInBounds(CurrentTermSize))
@@ -88,22 +107,54 @@ class Program
                     Raindrops.RemoveAt(i);
             }
 
+            StopwatchPart.Stop();
+            UpdateAndRenderTime = StopwatchPart.Elapsed;
+
+            if (DisplayDiagnostics != 0)
+            {
+                DiagnosticDisplayString = (DisplayDiagnostics == 2 ? $"Raindrop Spawning Time: {SpawnTime.TotalMilliseconds:F3} ms. Update & Render Time: {UpdateAndRenderTime.TotalMilliseconds:F3} ms. Last Composite Time: {LastCompositeTime.TotalMilliseconds:F3} ms. Last Write Time: {LastWriteOutTime.TotalMilliseconds:F3} ms. Last Write Length: {LastWriteOutLength} " : "") + $"Last Loop Time: {LastLoopTime.TotalMilliseconds:F3} ms. Num Raindrops: {Raindrops.Count}";
+                bool SuccessfullyWroteToBottomOfScreen = DiagnosticDisplayString.ToRGB_Chars().TryCopyTo(CharBuffer.Slice((CurrentTermSize.lines - 1) * CurrentTermSize.cols));
+                if(!SuccessfullyWroteToBottomOfScreen)
+                    DiagnosticDisplayString.ToRGB_Chars().TryCopyTo(CharBuffer);
+            }
+
+            StopwatchPart.Restart();
+
+            string RenderedFrame = RenderFrameForConsole(CharBuffer, CurrentTermSize);
+            LastWriteOutLength = RenderedFrame.Length;
+
+            StopwatchPart.Stop();
+            LastCompositeTime = StopwatchPart.Elapsed;
+
+            StopwatchPart.Restart();
+
             Console.SetCursorPosition(0, 0);
-            Console.Write(RenderFrameForConsole(CharBuffer, CurrentTermSize));
+            Console.Write(RenderedFrame);
+
+            StopwatchPart.Stop();
+            LastWriteOutTime = StopwatchPart.Elapsed;
 
             if (Console.KeyAvailable)
             {
-                switch (Console.ReadKey().Key)
+                switch (Console.ReadKey(true).Key)
                 {
                     case ConsoleKey.Q:
                         Quit = true;
                         continue;
+                    case ConsoleKey.D:
+                        DisplayDiagnostics = (DisplayDiagnostics + 1) % 3;
+                        break;
                     default:
                         break;
                 }
             }
 
+            StopwatchFull.Stop();
+            LastLoopTime = StopwatchFull.Elapsed;
+
             Thread.Sleep(100);
+
+            StopwatchFull.Restart();
         }
 
         Console.Write("\x1b[?1049l");
