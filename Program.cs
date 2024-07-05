@@ -76,7 +76,7 @@ class Program
                         // I haven't seen any issues with it, but this is just my first attempt at writing it and it may be wrong.
                         for (int j = 0; j <= Raindrops.Count; j++)
                         {
-                            if(j + 1 >= Raindrops.Count)
+                            if (j + 1 >= Raindrops.Count)
                             {
                                 Raindrops.Insert(0, new(TrailLength, i, HSL_Util.HSLtoRGB(new(Random.Shared.NextDouble() * 360d, 1d, 0.6d)), ActiveRaindropCharCol, StartingLine));
                                 break;
@@ -114,7 +114,7 @@ class Program
             {
                 DiagnosticDisplayString = (DisplayDiagnostics == 2 ? $"Raindrop Spawning Time: {SpawnTime.TotalMilliseconds:F3} ms. Update & Render Time: {UpdateAndRenderTime.TotalMilliseconds:F3} ms. Last Composite Time: {LastCompositeTime.TotalMilliseconds:F3} ms. Last Write Time: {LastWriteOutTime.TotalMilliseconds:F3} ms. Last Write Length: {LastWriteOutLength} " : "") + $"Last Loop Time: {LastLoopTime.TotalMilliseconds:F3} ms. Num Raindrops: {Raindrops.Count}";
                 bool SuccessfullyWroteToBottomOfScreen = DiagnosticDisplayString.ToRGB_Chars().TryCopyTo(CharBuffer.Slice((CurrentTermSize.lines - 1) * CurrentTermSize.cols));
-                if(!SuccessfullyWroteToBottomOfScreen)
+                if (!SuccessfullyWroteToBottomOfScreen)
                     DiagnosticDisplayString.ToRGB_Chars().TryCopyTo(CharBuffer);
             }
 
