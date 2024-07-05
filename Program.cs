@@ -44,9 +44,34 @@ class Program
 
             CharBuffer.Fill(BlankChar);
 
-            while(Random.Shared.Next(2) == 0)
-                Raindrops.Add(new(TrailLength, CurrentTermSize.cols, HSL_Util.HSLtoRGB(new(Random.Shared.NextDouble() * 360d, 1d, 0.6d)), ActiveRaindropCharCol));
-
+            for (int i = 0; i < CurrentTermSize.cols; i++)
+            {
+                if (Random.Shared.NextSingle() < 0.015f) // Flat 1.5% chance for every column every update. Feels a little slow at small window sizes.
+                {
+                    // 90% chance that it starts from the top. 10% chance it starts somewhere random in the top half of the window. (Potentially still the top.)
+                    if (Random.Shared.NextSingle() < 0.9f)
+                    {
+                        Raindrops.Add(new(TrailLength, i, HSL_Util.HSLtoRGB(new(Random.Shared.NextDouble() * 360d, 1d, 0.6d)), ActiveRaindropCharCol));
+                    }
+                    else
+                    {
+                        int StartingLine = Random.Shared.Next(CurrentTermSize.lines / 2);
+                        // The rendering order relies on the fact that items in the list are ordered by age, naturally putting newer, higher raindrops later in the list.
+                        // Putting raindrops in with any other order would break the overlapping.
+                        // The following code *should* insert the new raindrop at the right-ish point in the list. 
+                        // I haven't seen any issues with it, but this is just my first attempt at writing it and it may be wrong.
+                        for (int j = 0; j <= Raindrops.Count; j++)
+                        {
+                            if (j + 1 >= Raindrops.Count | Raindrops[^(j + 1)].Line > StartingLine)
+                            {
+                                Raindrops.Insert(Raindrops.Count - (j + 1), new(TrailLength, i, HSL_Util.HSLtoRGB(new(Random.Shared.NextDouble() * 360d, 1d, 0.6d)), ActiveRaindropCharCol, StartingLine));
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            
             for (int i = 0; i < Raindrops.Count; i++)
             {
                 if (Raindrops[i].IsInBounds(CurrentTermSize))
