@@ -62,7 +62,12 @@ class Program
                         // I haven't seen any issues with it, but this is just my first attempt at writing it and it may be wrong.
                         for (int j = 0; j <= Raindrops.Count; j++)
                         {
-                            if (j + 1 >= Raindrops.Count | Raindrops[^(j + 1)].Line > StartingLine)
+                            if(j + 1 >= Raindrops.Count)
+                            {
+                                Raindrops.Insert(0, new(TrailLength, i, HSL_Util.HSLtoRGB(new(Random.Shared.NextDouble() * 360d, 1d, 0.6d)), ActiveRaindropCharCol, StartingLine));
+                                break;
+                            }
+                            if (Raindrops[^(j + 1)].Line > StartingLine)
                             {
                                 Raindrops.Insert(Raindrops.Count - (j + 1), new(TrailLength, i, HSL_Util.HSLtoRGB(new(Random.Shared.NextDouble() * 360d, 1d, 0.6d)), ActiveRaindropCharCol, StartingLine));
                                 break;
