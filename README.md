@@ -3,7 +3,7 @@ My take on the famous digital rain effect from the matrix.
 
 [![Digital-Rain-Big-Blue-Terminal-Plus.png](https://i.postimg.cc/GtRNHKY3/Digital-Rain-Big-Blue-Terminal-Plus.png)](https://postimg.cc/FdPG6jDw)
 
-[Youtube video of it running for longer](https://youtu.be/9UXcYOdrRUM)
+[(Old-ish) Youtube video of it running for longer](https://youtu.be/9UXcYOdrRUM)
 
 ### Running
 If you have dotnet installed, you can clone this repo, cd into it, and run `dotnet run` in your favorite shell.
