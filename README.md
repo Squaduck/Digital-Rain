@@ -1,7 +1,7 @@
 # Digital Rain
 My take on the famous digital rain effect from the matrix.
 
-[![Digital-Rain-Big-Blue-Terminal-Plus.png](https://i.postimg.cc/GtRNHKY3/Digital-Rain-Big-Blue-Terminal-Plus.png)](https://postimg.cc/FdPG6jDw)
+![DigitalRain_BigBlueTerminalPlus](https://github.com/Squaduck/Digital-Rain/assets/55469508/227a7d01-e204-462b-ab2d-fddf7d3d8ccb)
 
 [(Old-ish) Youtube video of it running for longer](https://youtu.be/9UXcYOdrRUM)
 
